@@ -46,7 +46,7 @@ function curlToPHP(curl) {
 	var req = extractRelevantPieces(cmd);
 
 	var code = promo+"\n"+start;
-	code += '$client = new Client();\n$response = $client->createRequest()->setUrl('req.url')\n';
+	code += '$client = new Client();\n$response = $client->createRequest()->setUrl('+req.url+')\n';
 
 	if (req.headers.length == 0 && !req.data.ascii && !req.data.files && !req.basicauth && !req.compressed) {
 		return code+renderSimple(req.method);
