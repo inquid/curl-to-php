@@ -14,9 +14,7 @@ function curlToPHP(curl) {
 	var endCurl = 'curl_close ($ch);\n';
 	var promo = "/* Yii2 http client */";
 	var start = "use yii\httpclient\Client;\n\n";
-	var result = 'if ($response->isOk) {
-    $newUserId = $response->data["id"];
-}';
+	var result = 'if ($response->isOk) {$newUserId = $response->data["id"];}';
 
 	// List of curl flags that are boolean typed; this helps with parsing
 	// a command like `curl -abc value` to know whether 'value' belongs to '-c'
