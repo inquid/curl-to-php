@@ -10,8 +10,8 @@
 */
 
 function curlToPHP(curl) {
-	var err = 'if (curl_errno($ch)) {\n    echo \'Error:\' . curl_error($ch);\n}\n';
-	var endCurl = 'curl_close ($ch);\n';
+	var err = 'else{\Yii::error("Error making the request ");}';
+	var endCurl = '';
 	var promo = "/* Yii2 http client */";
 	var start = "use yii\httpclient\Client;\n\n";
 	var result = 'if ($response->isOk) {$newUserId = $response->data["id"];}';
@@ -46,7 +46,7 @@ function curlToPHP(curl) {
 	var req = extractRelevantPieces(cmd);
 
 	var code = promo+"\n"+start;
-	code += '$client = new Client();\n$response = $client->createRequest()->setUrl('+req.url+')\n';
+	code += '$client = new Client();\n$response = $client->createRequest()->setUrl("'+req.url+'")\n';
 
 	if (req.headers.length == 0 && !req.data.ascii && !req.data.files && !req.basicauth && !req.compressed) {
 		return code+renderSimple(req.method);
